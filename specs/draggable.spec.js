@@ -12,6 +12,7 @@ describe('react-draggable', function () {
 			expect(drag.props.handle).toEqual(null);
 			expect(drag.props.cancel).toEqual(null);
 			expect(isNaN(drag.props.zIndex)).toEqual(true);
+			expect(drag.props.useChild).toEqual(true);
 			expect(typeof drag.props.onStart).toEqual('function');
 			expect(typeof drag.props.onDrag).toEqual('function');
 			expect(typeof drag.props.onStop).toEqual('function');
@@ -47,6 +48,14 @@ describe('react-draggable', function () {
 			expect(drag.props.onStart).toEqual(handleStart);
 			expect(drag.props.onDrag).toEqual(handleDrag);
 			expect(drag.props.onStop).toEqual(handleStop);
+		});
+
+		it('should honor useChild prop', function () {
+			var drag = TestUtils.renderIntoDocument(
+				<Draggable useChild={false}/>
+			);
+
+			expect(drag.getDOMNode().nodeName).toEqual('DIV');
 		});
 
 		it('should call onStart when dragging begins', function () {
