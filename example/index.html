@@ -45,12 +45,17 @@
 			padding: 10px;
 			float: left;
 		}
+
+    .bounding-box {
+      border: 4px solid #333;
+      overflow: hidden;
+    }
 	</style>
 </head>
 <body>
-<script src="https://fb.me/react-with-addons-0.11.1.js"></script>
-<script src="https://fb.me/JSXTransformer-0.11.1.js"></script>
-<script src="../dist/react-draggable.min.js"></script>
+<script src="https://fb.me/react-with-addons-0.11.2.js"></script>
+<script src="https://fb.me/JSXTransformer-0.11.2.js"></script>
+<script src="../dist/react-draggable.js"></script>
 <script type="text/jsx">
   /** @jsx React.DOM */
   var Draggable = ReactDraggable;
@@ -71,7 +76,7 @@
 
     render: function () {
       return (
-        <div>
+        <div className="bounding-box">
           <h1>React Draggable</h1>
           <p>
             <a href="https://github.com/mzabriskie/react-draggable/blob/master/example/index.html">Demo Source</a>
@@ -114,6 +119,12 @@
           </Draggable>
           <Draggable grid={[50,50]}>
             <div className="box">I snap to a 50 x 50 grid (using deprecated grid API)</div>
+          </Draggable>
+          <Draggable bound="all">
+            <div className="box">I am bound to this box</div>
+          </Draggable>
+          <Draggable bound="all point">
+            <div className="box">I am bound to this box by my top left corner</div>
           </Draggable>
         </div>
       );
