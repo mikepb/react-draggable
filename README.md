@@ -52,7 +52,16 @@ var App = React.createClass({
 			//
 			// `cancel` specifies a selector to be used to prevent drag initialization.
 			//
-			// `grid` specifies the x and y that dragging should snap to.
+			// `bound` determines whether to bound the movement to the parent box.
+			// - 'top' bounds movement to the top edge of the parent box.
+			// - 'right' bounds movement to the right edge of the parent box.
+			// - 'bottom' bounds movement to the bottom edge of the parent box.
+			// - 'left' bounds movement to the left edge of the parent box.
+		 	// - 'all' bounds movement to all edges (default if not specified).
+			// - 'point' to constrain only the top-left corner.
+			// - 'box' to constrain the entire box (default if not specified).
+			//
+			// `constrain` takes a function to constrain the dragging.
 			//
 			// `start` specifies the x and y that the dragged item should start at
 			//
@@ -67,8 +76,9 @@ var App = React.createClass({
 			<Draggable
 				axis="x"
 				handle=".handle"
-				grid={[25, 25]}
+				grid={constrain(25)}
 				start={{x: 25, y: 25}}
+				bound="all box"
 				zIndex={100}
 				onStart={this.handleStart}
 				onDrag={this.handleDrag}
@@ -81,6 +91,22 @@ var App = React.createClass({
 		);
 	}
 });
+
+function constrain (snap) {
+  function constrainOffset (offset, prev) {
+    var delta = offset - prev;
+    if (Math.abs(delta) >= snap) {
+      return prev + parseInt(delta / snap, 10) * snap;
+    }
+    return prev;
+  }
+  return function (pos) {
+    return {
+      top: constrainOffset(pos.top, pos.prevTop),
+      left: constrainOffset(pos.left, pos.prevLeft)
+    };
+  };
+}
 
 React.renderComponent(<App/>, document.body);
 ```
