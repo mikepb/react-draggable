@@ -48,8 +48,8 @@
 	</style>
 </head>
 <body>
-<script src="//fb.me/react-with-addons-0.11.1.js"></script>
-<script src="//fb.me/JSXTransformer-0.11.1.js"></script>
+<script src="https://fb.me/react-with-addons-0.11.1.js"></script>
+<script src="https://fb.me/JSXTransformer-0.11.1.js"></script>
 <script src="../dist/react-draggable.min.js"></script>
 <script type="text/jsx">
   /** @jsx React.DOM */
@@ -99,20 +99,42 @@
           </Draggable>
           <Draggable cancel="strong" zIndex={100}>
             <div className="box">
-              <strong className="no-cursor">Can't drag here</strong>
+              <strong className="no-cursor">Can&apos;t drag here</strong>
               <div>Dragging here works</div>
             </div>
           </Draggable>
-          <Draggable grid={[25, 25]}>
+          <Draggable constrain={constrain(25)}>
             <div className="box">I snap to a 25 x 25 grid</div>
           </Draggable>
-          <Draggable grid={[50, 50]}>
+          <Draggable constrain={constrain(50)}>
             <div className="box">I snap to a 50 x 50 grid</div>
+          </Draggable>
+          <Draggable grid={[25,25]}>
+            <div className="box">I snap to a 25 x 25 grid (using deprecated grid API)</div>
+          </Draggable>
+          <Draggable grid={[50,50]}>
+            <div className="box">I snap to a 50 x 50 grid (using deprecated grid API)</div>
           </Draggable>
         </div>
       );
     }
   });
+
+  function constrain (snap) {
+    function constrainOffset (offset, prev) {
+      var delta = offset - prev;
+      if (Math.abs(delta) >= snap) {
+        return prev + parseInt(delta / snap, 10) * snap;
+      }
+      return prev;
+    }
+    return function (pos) {
+      return {
+        top: constrainOffset(pos.top, pos.prevTop),
+        left: constrainOffset(pos.left, pos.prevLeft)
+      };
+    };
+  }
 
   React.renderComponent(<App/>, document.body);
 </script>
