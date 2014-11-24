@@ -9,6 +9,7 @@ describe('react-draggable', function () {
 			var drag = TestUtils.renderIntoDocument(<Draggable><div/></Draggable>);
 
 			expect(drag.props.axis).toEqual('both');
+			expect(drag.props.bound).toEqual(false);
 			expect(drag.props.handle).toEqual(null);
 			expect(drag.props.cancel).toEqual(null);
 			expect(isNaN(drag.props.zIndex)).toEqual(true);
@@ -26,6 +27,7 @@ describe('react-draggable', function () {
 			var drag = TestUtils.renderIntoDocument(
 				<Draggable
 					axis="y"
+					bound={false}
 					handle=".handle"
 					cancel=".cancel"
 					grid={[10, 10]}
@@ -41,6 +43,7 @@ describe('react-draggable', function () {
 			);
 
 			expect(drag.props.axis).toEqual('y');
+			expect(drag.props.bound).toEqual(false);
 			expect(drag.props.handle).toEqual('.handle');
 			expect(drag.props.cancel).toEqual('.cancel');
 			expect(drag.props.grid).toEqual([10, 10]);
