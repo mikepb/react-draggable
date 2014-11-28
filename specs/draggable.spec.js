@@ -85,6 +85,18 @@ describe('react-draggable', function () {
 			TestUtils.Simulate.mouseUp(drag.getDOMNode());
 			expect(called).toEqual(true);
 		});
+
+		it('should add react-draggable-dragging CSS class to body element when dragging', function () {
+			var drag = TestUtils.renderIntoDocument(
+				<Draggable>
+					<div/>
+				</Draggable>
+			);
+
+			TestUtils.Simulate.mouseDown(drag.getDOMNode());
+			expect(document.body.className).toMatch(/\breact-draggable-dragging\b/);
+			TestUtils.Simulate.mouseUp(drag.getDOMNode());
+		});
 	});
 
 	describe('interaction', function () {
