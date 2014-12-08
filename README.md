@@ -1,13 +1,13 @@
-# react-draggable [![Build Status](https://travis-ci.org/mzabriskie/react-draggable.svg?branch=master)](https://travis-ci.org/mzabriskie/react-draggable)
+# react-draggable [![Build Status](https://travis-ci.org/mikepb/react-draggable.svg?branch=master)](https://travis-ci.org/mikepb/react-draggable)
 
 React draggable component
+
+Based on https://github.com/mzabriskie/react-draggable
 
 ## Installing
 
 ```bash
-$ npm install react-draggable
-# or
-$ bower install react-draggable
+$ npm install react-draggable2
 ```
 
 ## Demo

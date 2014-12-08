@@ -1,7 +1,6 @@
 {
-  "name": "react-draggable",
-  "version": "0.3.0",
-  "private": true,
+  "name": "react-draggable2",
+  "version": "0.4.0",
   "description": "React draggable component",
   "main": "index.js",
   "scripts": {
@@ -15,7 +14,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/mzabriskie/react-draggable.git"
+    "url": "https://github.com/mikepb/react-draggable.git"
   },
   "keywords": [
     "react",
@@ -23,11 +22,17 @@
     "react-component"
   ],
   "author": "Matt Zabriskie",
+  "contributors": [
+    {
+      "name": "Michael Phan-Ba",
+      "email": "michael@mikepb.com"
+    }
+  ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/mzabriskie/react-draggable/issues"
+    "url": "https://github.com/mikepb/react-draggable/issues"
   },
-  "homepage": "https://github.com/mzabriskie/react-draggable",
+  "homepage": "https://github.com/mikepb/react-draggable",
   "peerDependencies": {
     "react": "^0.12.1"
   },
