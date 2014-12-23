@@ -63,9 +63,15 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 	
-	/** @jsx React.DOM */
 	var React = __webpack_require__(2);
 	var emptyFunction = __webpack_require__(3);
+	
+	// for accessing browser globals
+	var root = typeof window !== 'undefined' ? window : this;
+	var bodyElement;
+	if (typeof document !== 'undefined' && 'body' in document) {
+		bodyElement = document.body;
+	}
 	
 	function updateBoundState (state, bound) {
 		if (!bound) return state;
@@ -130,8 +136,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 	
 	// @credits: http://stackoverflow.com/questions/4817029/whats-the-best-way-to-detect-a-touch-screen-device-using-javascript/4819886#4819886
-	var isTouchDevice = 'ontouchstart' in window // works on most browsers
-			|| 'onmsgesturechange' in window; // works on ie10 on ms surface
+	var isTouchDevice = 'ontouchstart' in root // works on most browsers
+									 || 'onmsgesturechange' in root; // works on ie10 on ms surface
 	
 	// look ::handleDragStart
 	//function isMultiTouch(e) {
@@ -491,8 +497,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 		componentWillUnmount: function() {
 			// Remove any leftover event handlers
-			removeEvent(window, dragEventFor['move'], this.handleDrag);
-			removeEvent(window, dragEventFor['end'], this.handleDragEnd);
+			removeEvent(root, dragEventFor['move'], this.handleDrag);
+			removeEvent(root, dragEventFor['end'], this.handleDragEnd);
 		},
 	
 		handleDragStart: function (e) {
@@ -525,11 +531,11 @@ return /******/ (function(modules) { // webpackBootstrap
 			this.props.onStart(e, createUIEvent(this));
 	
 			// Add event handlers
-			addEvent(window, dragEventFor['move'], this.handleDrag);
-			addEvent(window, dragEventFor['end'], this.handleDragEnd);
+			addEvent(root, dragEventFor['move'], this.handleDrag);
+			addEvent(root, dragEventFor['end'], this.handleDragEnd);
 	
 			// Add dragging class to body element
-			document.body.className += ' react-draggable-dragging';
+			if (bodyElement) bodyElement.className += ' react-draggable-dragging';
 		},
 	
 		handleDragEnd: function (e) {
@@ -547,12 +553,15 @@ return /******/ (function(modules) { // webpackBootstrap
 			this.props.onStop(e, createUIEvent(this));
 	
 			// Remove event handlers
-			removeEvent(window, dragEventFor['move'], this.handleDrag);
-			removeEvent(window, dragEventFor['end'], this.handleDragEnd);
+			removeEvent(root, dragEventFor['move'], this.handleDrag);
+			removeEvent(root, dragEventFor['end'], this.handleDragEnd);
 	
 			// Remove dragging class from body element
-			var className = document.body.className;
-			document.body.className = className.replace(/(?:^|\s+)react-draggable-dragging\b/, ' ');
+			if (bodyElement) {
+				var className = bodyElement.className;
+				bodyElement.className =
+					className.replace(/(?:^|\s+)react-draggable-dragging\b/, ' ');
+			}
 		},
 	
 		handleDrag: function (e) {

@@ -23,3 +23,11 @@
 ### 0.3.0 (Oct 21, 2014)
 
 - Adding support for touch devices
+
+### 0.4.1 (Dec 7, 2014)
+
+- Adding support for bounding movement
+
+### 0.4.2 (Dec 7, 2014)
+
+- Prevent errors when accessing browser globals
