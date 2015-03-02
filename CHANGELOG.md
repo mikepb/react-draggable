@@ -31,3 +31,8 @@
 ### 0.4.2 (Dec 7, 2014)
 
 - Prevent errors when accessing browser globals
+
+### 0.4.3 (Mar 2, 2015)
+
+- Update dependencides
+- Fix an issue where browser may be detected as touch-enabled but touch event isn't thrown. @STRML

@@ -167,7 +167,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * get {clientX, clientY} positions of control
 	 * */
 	function getControlPosition(e) {
-		var position = !isTouchDevice ? e : e.touches[0];
+		var position = (e.touches && e.touches[0]) || e;
 		return {
 			clientX: position.clientX,
 			clientY: position.clientY
