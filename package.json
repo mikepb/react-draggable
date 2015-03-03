@@ -1,6 +1,6 @@
 {
   "name": "react-draggable2",
-  "version": "0.4.3-fix2",
+  "version": "0.4.3-fix3",
   "description": "React draggable component",
   "main": "index.js",
   "scripts": {
@@ -44,8 +44,5 @@
     "uglify-js": "^2.4.16",
     "webpack": "^1.6.0",
     "webpack-dev-server": "^1.6.6"
-  },
-  "dependencies": {
-    "modernizr": "^3.0.0-alpha.3"
   }
 }
