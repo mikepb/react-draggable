@@ -7,7 +7,7 @@
 		exports["ReactDraggable"] = factory(require("React"));
 	else
 		root["ReactDraggable"] = factory(root["React"]);
-})(this, function(__WEBPACK_EXTERNAL_MODULE_2__) {
+})(this, function(__WEBPACK_EXTERNAL_MODULE_1__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -54,17 +54,10 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(1);
-
-
-/***/ },
-/* 1 */
-/***/ function(module, exports, __webpack_require__) {
-
 	'use strict';
 	
-	var React = __webpack_require__(2);
-	var emptyFunction = __webpack_require__(3);
+	var React = __webpack_require__(1);
+	var emptyFunction = function () {};
 	
 	// for accessing browser globals
 	var root = typeof window !== 'undefined' ? window : this;
@@ -198,6 +191,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	module.exports = React.createClass({
 		displayName: 'Draggable',
+		mixins: [React.addons.PureRenderMixin],
 	
 		propTypes: {
 			/**
@@ -693,16 +687,16 @@ return /******/ (function(modules) { // webpackBootstrap
 				style.zIndex = this.props.zIndex;
 			}
 	
-			var props = {
-				style: style,
-				className: 'react-draggable',
+	 		var props = {
+	 			style: style,
+	 			className: 'react-draggable',
 	
-				onMouseDown: this.handleDragStart,
-				onTouchStart: this.onTouchStart,
+	 			onMouseDown: this.handleDragStart,
+	 			onTouchStart: this.onTouchStart,
 	
-				onMouseUp: this.handleDragEnd,
-				onTouchEnd: this.handleDragEnd
-			};
+	 			onMouseUp: this.handleDragEnd,
+	 			onTouchEnd: this.handleDragEnd
+	 		};
 	
 			// Reuse the child provided
 			// This makes it flexible to use whatever element is wanted (div, ul, etc)
@@ -732,51 +726,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 2 */
+/* 1 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __WEBPACK_EXTERNAL_MODULE_2__;
-
-/***/ },
-/* 3 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * Copyright 2013-2014, Facebook, Inc.
-	 * All rights reserved.
-	 *
-	 * This source code is licensed under the BSD-style license found in the
-	 * LICENSE file in the root directory of this source tree. An additional grant
-	 * of patent rights can be found in the PATENTS file in the same directory.
-	 *
-	 * @providesModule emptyFunction
-	 */
-	
-	function makeEmptyFunction(arg) {
-	  return function() {
-	    return arg;
-	  };
-	}
-	
-	/**
-	 * This function accepts and discards inputs; it has no side effects. This is
-	 * primarily useful idiomatically for overridable function endpoints which
-	 * always need to be callable, since JS lacks a null-call idiom ala Cocoa.
-	 */
-	function emptyFunction() {}
-	
-	emptyFunction.thatReturns = makeEmptyFunction;
-	emptyFunction.thatReturnsFalse = makeEmptyFunction(false);
-	emptyFunction.thatReturnsTrue = makeEmptyFunction(true);
-	emptyFunction.thatReturnsNull = makeEmptyFunction(null);
-	emptyFunction.thatReturnsThis = function() { return this; };
-	emptyFunction.thatReturnsArgument = function(arg) { return arg; };
-	
-	module.exports = emptyFunction;
-
+	module.exports = __WEBPACK_EXTERNAL_MODULE_1__;
 
 /***/ }
 /******/ ])
 });
 
-//# sourceMappingURL=react-draggable.map
+//# sourceMappingURL=react-draggable.js.map

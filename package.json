@@ -1,16 +1,13 @@
 {
   "name": "react-draggable2",
-  "version": "0.4.3",
+  "version": "0.5.0-dev",
   "description": "React draggable component",
-  "main": "index.js",
+  "main": "lib/draggable.js",
   "scripts": {
-    "test": "script/test --single-run",
-    "start": "script/build"
-  },
-  "browserify": {
-    "transform": [
-      "reactify"
-    ]
+    "test": "karma start --single-run",
+    "watch": "jsx -w -x jsx --harmony --source-map-inline src lib",
+    "dist": "webpack src/draggable.jsx dist/react-draggable.js && webpack --optimize-minimize src/draggable.jsx dist/react-draggable.min.js",
+    "prepublish": "jsx -x jsx --harmony --source-map-inline src lib"
   },
   "repository": {
     "type": "git",
@@ -22,12 +19,10 @@
     "react-component"
   ],
   "author": "Matt Zabriskie",
-  "contributors": [
-    {
-      "name": "Michael Phan-Ba",
-      "email": "michael@mikepb.com"
-    }
-  ],
+  "contributors": [{
+    "name": "Michael Phan-Ba",
+    "email": "michael@mikepb.com"
+  }],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/mikepb/react-draggable/issues"
@@ -41,8 +36,7 @@
     "karma-jasmine": "^0.3.5",
     "karma-webpack": "^1.5.0",
     "react": "^0.12.2",
-    "uglify-js": "^2.4.16",
-    "webpack": "^1.6.0",
-    "webpack-dev-server": "^1.6.6"
+    "react-tools": "^0.12.2",
+    "webpack": "^1.6.0"
   }
 }

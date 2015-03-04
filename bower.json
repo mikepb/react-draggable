@@ -7,7 +7,7 @@
     "Michael Phan-Ba"
   ],
   "description": "React draggable component",
-  "main": "./dist/react-draggable.js",
+  "main": "./lib/draggable.js",
   "keywords": [
     "react",
     "draggable"

@@ -1,7 +1,8 @@
 **/.*
+bower.json
 example
+karma.conf.js
 script
 specs
-bower.json
-karma.conf.js
+src
 webpack.config.js
