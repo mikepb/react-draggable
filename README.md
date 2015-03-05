@@ -115,7 +115,7 @@ React.renderComponent(<App/>, document.body);
 
 - Fork the project
 - `$ npm install && npm run watch`
-- Make changes, jsx will watch and rebuild `lib/draggable.js` as you make changes to `src/draggable.jsx`
+- Make changes
 - Add appropriate tests
 - `$ npm test`
 - If tests don't pass, make them pass.

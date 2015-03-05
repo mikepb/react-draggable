@@ -12,11 +12,5 @@ module.exports = {
   externals: {
     "react/addons": "React"
   },
-  module: {
-    loaders: [{
-      test: /\.js$/,
-      loader: 'jsx-loader'
-    }]
-  },
   devtool: "source-map"
 };

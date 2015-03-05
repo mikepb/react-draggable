@@ -5,9 +5,7 @@
   "main": "lib/draggable.js",
   "scripts": {
     "test": "karma start --single-run",
-    "watch": "jsx -w -x jsx --harmony --source-map-inline src lib",
-    "dist": "webpack src/draggable.jsx dist/react-draggable.js && webpack --optimize-minimize src/draggable.jsx dist/react-draggable.min.js",
-    "prepublish": "jsx -x jsx --harmony --source-map-inline src lib"
+    "prepublish": "webpack lib/draggable.js dist/react-draggable.js && webpack --optimize-minimize lib/draggable.js dist/react-draggable.min.js"
   },
   "repository": {
     "type": "git",

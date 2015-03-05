@@ -1,54 +1,60 @@
-module.exports = function(config) {
-	config.set({
+"use strict";
 
-		basePath: '',
+/**
+ * Jasmine configuration.
+ */
 
-		frameworks: ['jasmine'],
+module.exports = function (config) {
+  config.set({
 
-		files: [
-			'specs/main.js'
-		],
+    basePath: "",
 
-		exclude: [
-		],
+    frameworks: ["jasmine"],
 
-		preprocessors: {
-			'specs/main.js': ['webpack']
-		},
+    files: [
+      "test/draggable_test.jsx"
+    ],
 
-		webpack: {
-			cache: true,
-			module: {
-				loaders: [
-					{test: /\.js$/, loader: 'jsx-loader'}
-				]
-			}
-		},
+    exclude: [],
 
-		webpackServer: {
-			stats: {
-				colors: true
-			}
-		},
+    preprocessors: {
+      "test/draggable_test.jsx": ["webpack"]
+    },
 
-		reporters: ['progress'],
+    webpack: {
+      cache: true,
+      module: {
+        loaders: [{
+          test: /\.jsx$/,
+          loader: "jsx-loader"
+        }]
+      }
+    },
 
-		port: 9876,
+    webpackServer: {
+      stats: {
+        colors: true
+      }
+    },
 
-		colors: true,
+    reporters: ["progress"],
 
-		logLevel: config.LOG_INFO,
+    port: 9876,
 
-		autoWatch: false,
+    colors: true,
 
-		browsers: ['Chrome'],
+    logLevel: config.LOG_INFO,
 
-		singleRun: false,
+    autoWatch: false,
 
-		plugins: [
-			require('karma-jasmine'),
-			require('karma-chrome-launcher'),
-			require('karma-webpack')
-		]
-	});
+    browsers: ["Chrome"],
+
+    singleRun: false,
+
+    plugins: [
+      require("karma-jasmine"),
+      require("karma-chrome-launcher"),
+      require("karma-webpack")
+    ]
+  });
 };
