@@ -36,3 +36,11 @@
 
 - Update dependencides
 - Fix an issue where browser may be detected as touch-enabled but touch event isn't thrown. @STRML
+
+
+### 0.5.0 (Mar 5, 2015)
+
+- Remove dependency on Reactify for Browserify users
+  [#2](https://github.com/mikepb/react-draggable/issues/2)
+- Use Webpack directly for minification
+- Source map files now have the `.js.map` file extention
