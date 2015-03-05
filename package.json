@@ -26,6 +26,9 @@
     "url": "https://github.com/mikepb/react-draggable/issues"
   },
   "homepage": "https://github.com/mikepb/react-draggable",
+  "peerDependencies": {
+    "react": "^0.12.2"
+  },
   "devDependencies": {
     "jsx-loader": "^0.12.2",
     "karma": "^0.12.31",
