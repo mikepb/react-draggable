@@ -10,6 +10,9 @@ Based on https://github.com/mzabriskie/react-draggable
 $ npm install react-draggable2
 ```
 
+You will also need install React to your top-level project due to
+[#2](https://github.com/mzabriskie/react-draggable/issues/22).
+
 ## Demo
 
 http://mzabriskie.github.io/react-draggable/example/
