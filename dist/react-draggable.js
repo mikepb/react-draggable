@@ -565,6 +565,11 @@ return /******/ (function(modules) { // webpackBootstrap
 		},
 	
 		handleDrag: function (e) {
+	        if (!this.isMounted()) {
+	            this.handleDragEnd.apply(e, arguments);
+	            return
+	        }
+	
 			var dragPoint = getControlPosition(e);
 			var offsetLeft = this._toPixels(this.state.offsetLeft);
 			var offsetTop = this._toPixels(this.state.offsetTop);
