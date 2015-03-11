@@ -549,10 +549,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	            this.setState({
 	                dragging: false
 	            });
-	        }
 	
-			// Call event handler
-			this.props.onStop(e, createUIEvent(this));
+	            // Call event handler
+	            this.props.onStop(e, createUIEvent(this));
+	        }
 	
 			// Remove event handlers
 			removeEvent(bodyElement, dragEventFor['move'], this.handleDrag);
