@@ -545,9 +545,11 @@ return /******/ (function(modules) { // webpackBootstrap
 			}
 	
 			// Turn off dragging
-			this.setState({
-				dragging: false
-			});
+	        if (this.isMounted()) {
+	            this.setState({
+	                dragging: false
+	            });
+	        }
 	
 			// Call event handler
 			this.props.onStop(e, createUIEvent(this));
