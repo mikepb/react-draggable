@@ -259,4 +259,60 @@ describe('react-draggable', function () {
 			expect(error).toEqual(true);
 		});
 	});
+
+	describe('mouse events', function () {
+		it('should pass through onMouseDown', function () {
+			var called = false;
+
+			var drag = TestUtils.renderIntoDocument(<Draggable onMouseDown={function() {called = true;}}><div/></Draggable>);
+
+			TestUtils.Simulate.mouseDown(drag.getDOMNode());
+			expect(called).toEqual(true);
+		});
+
+		it('should not drag if onMouseDown calls preventDefault', function () {
+			var drag = TestUtils.renderIntoDocument(<Draggable onMouseDown={function(e) {e.preventDefault();}}><div/></Draggable>);
+
+			TestUtils.Simulate.mouseDown(drag.getDOMNode());
+			expect(drag.state.dragging).toEqual(false);
+		});
+
+		it('should pass through onMouseUp', function () {
+			var called = false;
+
+			var drag = TestUtils.renderIntoDocument(<Draggable onMouseUp={function() {called = true;}}><div/></Draggable>);
+
+			TestUtils.Simulate.mouseUp(drag.getDOMNode());
+			expect(called).toEqual(true);
+		});
+	});
+
+	describe('touch events', function() {
+		it('should pass through onTouchStart', function () {
+			var called = false;
+
+			var drag = TestUtils.renderIntoDocument(<Draggable onTouchStart={function() {called = true;}}><div/></Draggable>);
+
+			TestUtils.Simulate.touchStart(drag.getDOMNode());
+			expect(called).toEqual(true);
+		});
+
+		it('should not drag if onTouchStart calls preventDefault', function () {
+			var drag = TestUtils.renderIntoDocument(<Draggable onTouchStart={function(e) {e.preventDefault();}}><div/></Draggable>);
+
+			TestUtils.Simulate.touchStart(drag.getDOMNode());
+			expect(drag.state.dragging).toEqual(false);
+		});
+
+
+		it('should pass through onTouchEnd', function () {
+			var called = false;
+
+			var drag = TestUtils.renderIntoDocument(<Draggable onTouchEnd={function() {called = true;}}><div/></Draggable>);
+
+			TestUtils.Simulate.touchEnd(drag.getDOMNode());
+			expect(called).toEqual(true);
+		});
+	});
+
 });
