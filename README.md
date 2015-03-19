@@ -79,7 +79,7 @@ var App = React.createClass({
 			<Draggable
 				axis="x"
 				handle=".handle"
-				grid={constrain(25)}
+				constrain={constrain(25)}
 				start={{x: 25, y: 25}}
 				bound="all box"
 				zIndex={100}
