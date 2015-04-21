@@ -2,6 +2,7 @@
 var React = require('react/addons');
 var TestUtils = React.addons.TestUtils;
 var Draggable = require('../lib/draggable');
+React.initializeTouchEvents(true);
 
 describe('react-draggable', function () {
 	describe('props', function () {
@@ -86,6 +87,32 @@ describe('react-draggable', function () {
 			expect(called).toEqual(true);
 		});
 
+		it('should call onStart when touch dragging begins', function () {
+			var called = false;
+			var drag = TestUtils.renderIntoDocument(
+				<Draggable onStart={function () { called = true; }}>
+					<div/>
+				</Draggable>
+			);
+
+			TestUtils.Simulate.touchStart(drag.getDOMNode());
+			expect(called).toEqual(true);
+		});
+
+		it('should call onStop when touch dragging ends', function () {
+			var called = false;
+			var drag = TestUtils.renderIntoDocument(
+				<Draggable onStop={function () { called = true; }}>
+					<div/>
+				</Draggable>
+			);
+
+			TestUtils.Simulate.touchStart(drag.getDOMNode());
+			TestUtils.Simulate.touchEnd(drag.getDOMNode());
+			expect(called).toEqual(true);
+		});
+
+
 		it('should add react-draggable-dragging CSS class to body element when dragging', function () {
 			var drag = TestUtils.renderIntoDocument(
 				<Draggable>
@@ -99,12 +126,12 @@ describe('react-draggable', function () {
 		});
 	});
 
-	describe('interaction', function () {
+	describe('mouse interaction', function () {
 		it('should initialize dragging onmousedown', function () {
 			var drag = TestUtils.renderIntoDocument(<Draggable><div/></Draggable>);
 
 			TestUtils.Simulate.mouseDown(drag.getDOMNode());
-			expect(drag.state.dragging).toEqual(true);
+			expect(drag.state.dragging).toEqual('mouse');
 		});
 
 		it('should only initialize dragging onmousedown of handle', function () {
@@ -121,7 +148,7 @@ describe('react-draggable', function () {
 			expect(drag.state.dragging).toEqual(false);
 
 			TestUtils.Simulate.mouseDown(drag.getDOMNode().querySelector('.handle'));
-			expect(drag.state.dragging).toEqual(true);
+			expect(drag.state.dragging).toEqual('mouse');
 		});
 
 		it('should not initialize dragging onmousedown of cancel', function () {
@@ -138,18 +165,71 @@ describe('react-draggable', function () {
 			expect(drag.state.dragging).toEqual(false);
 
 			TestUtils.Simulate.mouseDown(drag.getDOMNode().querySelector('.content'));
-			expect(drag.state.dragging).toEqual(true);
+			expect(drag.state.dragging).toEqual('mouse');
 		});
 
 		it('should discontinue dragging onmouseup', function () {
 			var drag = TestUtils.renderIntoDocument(<Draggable><div/></Draggable>);
 
 			TestUtils.Simulate.mouseDown(drag.getDOMNode());
-			expect(drag.state.dragging).toEqual(true);
+			expect(drag.state.dragging).toEqual('mouse');
 
 			TestUtils.Simulate.mouseUp(drag.getDOMNode());
 			expect(drag.state.dragging).toEqual(false);
 		});
+	});
+	
+	describe('touch interaction', function () {
+		it('should initialize dragging ontouchstart', function () {
+			var drag = TestUtils.renderIntoDocument(<Draggable><div/></Draggable>);
+
+			TestUtils.Simulate.touchStart(drag.getDOMNode());
+			expect(drag.state.dragging).toEqual('touch');
+		});
+
+		it('should only initialize dragging ontouchstart of handle', function () {
+			var drag = TestUtils.renderIntoDocument(
+				<Draggable handle=".handle">
+					<div>
+						<div className="handle">Handle</div>
+						<div className="content">Lorem ipsum...</div>
+					</div>
+				</Draggable>
+			);
+
+			TestUtils.Simulate.touchStart(drag.getDOMNode().querySelector('.content'));
+			expect(drag.state.dragging).toEqual(false);
+
+			TestUtils.Simulate.touchStart(drag.getDOMNode().querySelector('.handle'));
+			expect(drag.state.dragging).toEqual('touch');
+		});
+
+		it('should not initialize dragging ontouchstart of cancel', function () {
+			var drag = TestUtils.renderIntoDocument(
+				<Draggable cancel=".cancel">
+					<div>
+						<div className="cancel">Cancel</div>
+						<div className="content">Lorem ipsum...</div>
+					</div>
+				</Draggable>
+			);
+
+			TestUtils.Simulate.touchStart(drag.getDOMNode().querySelector('.cancel'));
+			expect(drag.state.dragging).toEqual(false);
+
+			TestUtils.Simulate.touchStart(drag.getDOMNode().querySelector('.content'));
+			expect(drag.state.dragging).toEqual('touch');
+		});
+
+		it('should discontinue dragging ontouchend', function () {
+			var drag = TestUtils.renderIntoDocument(<Draggable><div/></Draggable>);
+
+			TestUtils.Simulate.touchStart(drag.getDOMNode());
+			expect(drag.state.dragging).toEqual('touch');
+
+			TestUtils.Simulate.touchEnd(drag.getDOMNode());
+			expect(drag.state.dragging).toEqual(false);
+		});		
 	});
 
 	describe('validation', function () {
@@ -179,4 +259,60 @@ describe('react-draggable', function () {
 			expect(error).toEqual(true);
 		});
 	});
+
+	describe('mouse events', function () {
+		it('should pass through onMouseDown', function () {
+			var called = false;
+
+			var drag = TestUtils.renderIntoDocument(<Draggable onMouseDown={function() {called = true;}}><div/></Draggable>);
+
+			TestUtils.Simulate.mouseDown(drag.getDOMNode());
+			expect(called).toEqual(true);
+		});
+
+		it('should not drag if onMouseDown calls preventDefault', function () {
+			var drag = TestUtils.renderIntoDocument(<Draggable onMouseDown={function(e) {e.preventDefault();}}><div/></Draggable>);
+
+			TestUtils.Simulate.mouseDown(drag.getDOMNode());
+			expect(drag.state.dragging).toEqual(false);
+		});
+
+		it('should pass through onMouseUp', function () {
+			var called = false;
+
+			var drag = TestUtils.renderIntoDocument(<Draggable onMouseUp={function() {called = true;}}><div/></Draggable>);
+
+			TestUtils.Simulate.mouseUp(drag.getDOMNode());
+			expect(called).toEqual(true);
+		});
+	});
+
+	describe('touch events', function() {
+		it('should pass through onTouchStart', function () {
+			var called = false;
+
+			var drag = TestUtils.renderIntoDocument(<Draggable onTouchStart={function() {called = true;}}><div/></Draggable>);
+
+			TestUtils.Simulate.touchStart(drag.getDOMNode());
+			expect(called).toEqual(true);
+		});
+
+		it('should not drag if onTouchStart calls preventDefault', function () {
+			var drag = TestUtils.renderIntoDocument(<Draggable onTouchStart={function(e) {e.preventDefault();}}><div/></Draggable>);
+
+			TestUtils.Simulate.touchStart(drag.getDOMNode());
+			expect(drag.state.dragging).toEqual(false);
+		});
+
+
+		it('should pass through onTouchEnd', function () {
+			var called = false;
+
+			var drag = TestUtils.renderIntoDocument(<Draggable onTouchEnd={function() {called = true;}}><div/></Draggable>);
+
+			TestUtils.Simulate.touchEnd(drag.getDOMNode());
+			expect(called).toEqual(true);
+		});
+	});
+
 });
