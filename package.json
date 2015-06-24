@@ -28,13 +28,14 @@
   "homepage": "https://github.com/mikepb/react-draggable",
   "devDependencies": {
     "jsx-loader": "*",
-    "karma": "*",
-    "karma-chrome-launcher": "*",
-    "karma-cli": "*",
-    "karma-jasmine": "*",
-    "karma-webpack": "*",
+    "karma": "^0.12.37",
+    "karma-chrome-launcher": "^0.2.0",
+    "karma-cli": "^0.0.4",
+    "karma-jasmine": "^0.3.5",
+    "karma-webpack": "^1.5.1",
+    "node-libs-browser": "^0.5.2",
     "react": "^0.13.0",
-    "react-tools": "^0.12.2",
-    "webpack": "*"
+    "react-tools": "^0.13.3",
+    "webpack": "^1.9.11"
   }
 }
