@@ -47,3 +47,10 @@
 ### 0.5.1 (Mar 5, 2015)
 
 - Remove `peerDependencies` from `package.json` #4
+
+### 0.6.0 (June 24, 2015)
+
+- Fix: event forwarding and preventDefault() logic. @motiz88
+- Fix: use React.cloneElement instead of cloneWithProps. @m0x72
+- Update dependencies
+
