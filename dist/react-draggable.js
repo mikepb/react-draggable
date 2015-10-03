@@ -720,8 +720,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	
 	    // Save new state
-	    state.clientX = state.offsetLeft + offsetParent.getBoundingClientRect().left;
-	    state.clientY = state.offsetTop + offsetParent.getBoundingClientRect().top;
+	    state.clientX = this.state.clientX + (state.offsetLeft - offsetLeft);
+	    state.clientY = this.state.clientY + (state.offsetTop - offsetTop);
 	    this.setState(state);
 	
 	    // Call event handler
