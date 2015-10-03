@@ -1,4 +1,3 @@
-/** @jsx React.DOM */
 var React = require('react');
 var ReactDOM = require('react-dom');
 var TestUtils = require('react-addons-test-utils');
@@ -178,7 +177,7 @@ describe('react-draggable', function () {
 			expect(drag.state.dragging).toEqual(false);
 		});
 	});
-	
+
 	describe('touch interaction', function () {
 		it('should initialize dragging ontouchstart', function () {
 			var drag = TestUtils.renderIntoDocument(<Draggable><div/></Draggable>);
@@ -229,7 +228,7 @@ describe('react-draggable', function () {
 
 			TestUtils.Simulate.touchEnd(ReactDOM.findDOMNode(drag));
 			expect(drag.state.dragging).toEqual(false);
-		});		
+		});
 	});
 
 	describe('validation', function () {
