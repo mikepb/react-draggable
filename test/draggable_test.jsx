@@ -1,8 +1,8 @@
 /** @jsx React.DOM */
-var React = require('react/addons');
-var TestUtils = React.addons.TestUtils;
+var React = require('react');
+var ReactDOM = require('react-dom');
+var TestUtils = require('react-addons-test-utils');
 var Draggable = require('../lib/draggable');
-React.initializeTouchEvents(true);
 
 describe('react-draggable', function () {
 	describe('props', function () {
@@ -59,7 +59,7 @@ describe('react-draggable', function () {
 				<Draggable useChild={false}/>
 			);
 
-			expect(drag.getDOMNode().nodeName).toEqual('DIV');
+			expect(ReactDOM.findDOMNode(drag).nodeName).toEqual('DIV');
 		});
 
 		it('should call onStart when dragging begins', function () {
@@ -70,7 +70,7 @@ describe('react-draggable', function () {
 				</Draggable>
 			);
 
-			TestUtils.Simulate.mouseDown(drag.getDOMNode());
+			TestUtils.Simulate.mouseDown(ReactDOM.findDOMNode(drag));
 			expect(called).toEqual(true);
 		});
 
@@ -82,8 +82,8 @@ describe('react-draggable', function () {
 				</Draggable>
 			);
 
-			TestUtils.Simulate.mouseDown(drag.getDOMNode());
-			TestUtils.Simulate.mouseUp(drag.getDOMNode());
+			TestUtils.Simulate.mouseDown(ReactDOM.findDOMNode(drag));
+			TestUtils.Simulate.mouseUp(ReactDOM.findDOMNode(drag));
 			expect(called).toEqual(true);
 		});
 
@@ -95,7 +95,7 @@ describe('react-draggable', function () {
 				</Draggable>
 			);
 
-			TestUtils.Simulate.touchStart(drag.getDOMNode());
+			TestUtils.Simulate.touchStart(ReactDOM.findDOMNode(drag));
 			expect(called).toEqual(true);
 		});
 
@@ -107,8 +107,8 @@ describe('react-draggable', function () {
 				</Draggable>
 			);
 
-			TestUtils.Simulate.touchStart(drag.getDOMNode());
-			TestUtils.Simulate.touchEnd(drag.getDOMNode());
+			TestUtils.Simulate.touchStart(ReactDOM.findDOMNode(drag));
+			TestUtils.Simulate.touchEnd(ReactDOM.findDOMNode(drag));
 			expect(called).toEqual(true);
 		});
 
@@ -120,9 +120,9 @@ describe('react-draggable', function () {
 				</Draggable>
 			);
 
-			TestUtils.Simulate.mouseDown(drag.getDOMNode());
+			TestUtils.Simulate.mouseDown(ReactDOM.findDOMNode(drag));
 			expect(document.body.className).toMatch(/\breact-draggable-dragging\b/);
-			TestUtils.Simulate.mouseUp(drag.getDOMNode());
+			TestUtils.Simulate.mouseUp(ReactDOM.findDOMNode(drag));
 		});
 	});
 
@@ -130,7 +130,7 @@ describe('react-draggable', function () {
 		it('should initialize dragging onmousedown', function () {
 			var drag = TestUtils.renderIntoDocument(<Draggable><div/></Draggable>);
 
-			TestUtils.Simulate.mouseDown(drag.getDOMNode());
+			TestUtils.Simulate.mouseDown(ReactDOM.findDOMNode(drag));
 			expect(drag.state.dragging).toEqual('mouse');
 		});
 
@@ -144,10 +144,10 @@ describe('react-draggable', function () {
 				</Draggable>
 			);
 
-			TestUtils.Simulate.mouseDown(drag.getDOMNode().querySelector('.content'));
+			TestUtils.Simulate.mouseDown(ReactDOM.findDOMNode(drag).querySelector('.content'));
 			expect(drag.state.dragging).toEqual(false);
 
-			TestUtils.Simulate.mouseDown(drag.getDOMNode().querySelector('.handle'));
+			TestUtils.Simulate.mouseDown(ReactDOM.findDOMNode(drag).querySelector('.handle'));
 			expect(drag.state.dragging).toEqual('mouse');
 		});
 
@@ -161,20 +161,20 @@ describe('react-draggable', function () {
 				</Draggable>
 			);
 
-			TestUtils.Simulate.mouseDown(drag.getDOMNode().querySelector('.cancel'));
+			TestUtils.Simulate.mouseDown(ReactDOM.findDOMNode(drag).querySelector('.cancel'));
 			expect(drag.state.dragging).toEqual(false);
 
-			TestUtils.Simulate.mouseDown(drag.getDOMNode().querySelector('.content'));
+			TestUtils.Simulate.mouseDown(ReactDOM.findDOMNode(drag).querySelector('.content'));
 			expect(drag.state.dragging).toEqual('mouse');
 		});
 
 		it('should discontinue dragging onmouseup', function () {
 			var drag = TestUtils.renderIntoDocument(<Draggable><div/></Draggable>);
 
-			TestUtils.Simulate.mouseDown(drag.getDOMNode());
+			TestUtils.Simulate.mouseDown(ReactDOM.findDOMNode(drag));
 			expect(drag.state.dragging).toEqual('mouse');
 
-			TestUtils.Simulate.mouseUp(drag.getDOMNode());
+			TestUtils.Simulate.mouseUp(ReactDOM.findDOMNode(drag));
 			expect(drag.state.dragging).toEqual(false);
 		});
 	});
@@ -183,7 +183,7 @@ describe('react-draggable', function () {
 		it('should initialize dragging ontouchstart', function () {
 			var drag = TestUtils.renderIntoDocument(<Draggable><div/></Draggable>);
 
-			TestUtils.Simulate.touchStart(drag.getDOMNode());
+			TestUtils.Simulate.touchStart(ReactDOM.findDOMNode(drag));
 			expect(drag.state.dragging).toEqual('touch');
 		});
 
@@ -197,10 +197,10 @@ describe('react-draggable', function () {
 				</Draggable>
 			);
 
-			TestUtils.Simulate.touchStart(drag.getDOMNode().querySelector('.content'));
+			TestUtils.Simulate.touchStart(ReactDOM.findDOMNode(drag).querySelector('.content'));
 			expect(drag.state.dragging).toEqual(false);
 
-			TestUtils.Simulate.touchStart(drag.getDOMNode().querySelector('.handle'));
+			TestUtils.Simulate.touchStart(ReactDOM.findDOMNode(drag).querySelector('.handle'));
 			expect(drag.state.dragging).toEqual('touch');
 		});
 
@@ -214,20 +214,20 @@ describe('react-draggable', function () {
 				</Draggable>
 			);
 
-			TestUtils.Simulate.touchStart(drag.getDOMNode().querySelector('.cancel'));
+			TestUtils.Simulate.touchStart(ReactDOM.findDOMNode(drag).querySelector('.cancel'));
 			expect(drag.state.dragging).toEqual(false);
 
-			TestUtils.Simulate.touchStart(drag.getDOMNode().querySelector('.content'));
+			TestUtils.Simulate.touchStart(ReactDOM.findDOMNode(drag).querySelector('.content'));
 			expect(drag.state.dragging).toEqual('touch');
 		});
 
 		it('should discontinue dragging ontouchend', function () {
 			var drag = TestUtils.renderIntoDocument(<Draggable><div/></Draggable>);
 
-			TestUtils.Simulate.touchStart(drag.getDOMNode());
+			TestUtils.Simulate.touchStart(ReactDOM.findDOMNode(drag));
 			expect(drag.state.dragging).toEqual('touch');
 
-			TestUtils.Simulate.touchEnd(drag.getDOMNode());
+			TestUtils.Simulate.touchEnd(ReactDOM.findDOMNode(drag));
 			expect(drag.state.dragging).toEqual(false);
 		});		
 	});
@@ -266,14 +266,14 @@ describe('react-draggable', function () {
 
 			var drag = TestUtils.renderIntoDocument(<Draggable onMouseDown={function() {called = true;}}><div/></Draggable>);
 
-			TestUtils.Simulate.mouseDown(drag.getDOMNode());
+			TestUtils.Simulate.mouseDown(ReactDOM.findDOMNode(drag));
 			expect(called).toEqual(true);
 		});
 
 		it('should not drag if onMouseDown calls preventDefault', function () {
 			var drag = TestUtils.renderIntoDocument(<Draggable onMouseDown={function(e) {e.preventDefault();}}><div/></Draggable>);
 
-			TestUtils.Simulate.mouseDown(drag.getDOMNode());
+			TestUtils.Simulate.mouseDown(ReactDOM.findDOMNode(drag));
 			expect(drag.state.dragging).toEqual(false);
 		});
 
@@ -282,7 +282,7 @@ describe('react-draggable', function () {
 
 			var drag = TestUtils.renderIntoDocument(<Draggable onMouseUp={function() {called = true;}}><div/></Draggable>);
 
-			TestUtils.Simulate.mouseUp(drag.getDOMNode());
+			TestUtils.Simulate.mouseUp(ReactDOM.findDOMNode(drag));
 			expect(called).toEqual(true);
 		});
 	});
@@ -293,14 +293,14 @@ describe('react-draggable', function () {
 
 			var drag = TestUtils.renderIntoDocument(<Draggable onTouchStart={function() {called = true;}}><div/></Draggable>);
 
-			TestUtils.Simulate.touchStart(drag.getDOMNode());
+			TestUtils.Simulate.touchStart(ReactDOM.findDOMNode(drag));
 			expect(called).toEqual(true);
 		});
 
 		it('should not drag if onTouchStart calls preventDefault', function () {
 			var drag = TestUtils.renderIntoDocument(<Draggable onTouchStart={function(e) {e.preventDefault();}}><div/></Draggable>);
 
-			TestUtils.Simulate.touchStart(drag.getDOMNode());
+			TestUtils.Simulate.touchStart(ReactDOM.findDOMNode(drag));
 			expect(drag.state.dragging).toEqual(false);
 		});
 
@@ -310,7 +310,7 @@ describe('react-draggable', function () {
 
 			var drag = TestUtils.renderIntoDocument(<Draggable onTouchEnd={function() {called = true;}}><div/></Draggable>);
 
-			TestUtils.Simulate.touchEnd(drag.getDOMNode());
+			TestUtils.Simulate.touchEnd(ReactDOM.findDOMNode(drag));
 			expect(called).toEqual(true);
 		});
 	});

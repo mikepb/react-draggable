@@ -17,25 +17,33 @@
     "react-component"
   ],
   "author": "Matt Zabriskie",
-  "contributors": [{
-    "name": "Michael Phan-Ba",
-    "email": "michael@mikepb.com"
-  }],
+  "contributors": [
+    {
+      "name": "Michael Phan-Ba",
+      "email": "michael@mikepb.com"
+    }
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/mikepb/react-draggable/issues"
   },
   "homepage": "https://github.com/mikepb/react-draggable",
   "devDependencies": {
+    "jasmine": "^2.3.2",
     "jsx-loader": "*",
-    "karma": "^0.12.37",
+    "karma": "^0.13.3",
     "karma-chrome-launcher": "^0.2.0",
-    "karma-cli": "^0.0.4",
-    "karma-jasmine": "^0.3.5",
-    "karma-webpack": "^1.5.1",
+    "karma-cli": "^0.1.1",
+    "karma-jasmine": "^0.3.6",
+    "karma-webpack": "^1.7.0",
     "node-libs-browser": "^0.5.2",
-    "react": "^0.13.0",
+    "react": "0.14.0-rc1",
+    "react-dom": "^0.14.0-rc1",
     "react-tools": "^0.13.3",
-    "webpack": "^1.9.11"
+    "webpack": "^1.12.2"
+  },
+  "dependencies": {
+    "react-addons-pure-render-mixin": "^0.14.0-rc1",
+    "react-addons-test-utils": "^0.14.0-rc1"
   }
 }
