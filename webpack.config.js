@@ -10,7 +10,8 @@ module.exports = {
     libraryTarget: "umd"
   },
   externals: {
-    "react/addons": "React"
+    "react": "React",
+    "react-dom": "ReactDOM"
   },
   devtool: "source-map"
 };

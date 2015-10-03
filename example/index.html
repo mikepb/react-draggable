@@ -54,11 +54,11 @@
 	</style>
 </head>
 <body>
-<script src="https://fb.me/react-with-addons-0.12.2.js"></script>
-<script src="https://fb.me/JSXTransformer-0.12.2.js"></script>
+<div id="root"></div>
+<script src="../node_modules/react/dist/react-with-addons.js"></script>
+<script src="../node_modules/react/dist/react-dom.js"></script>
 <script src="../dist/react-draggable.js"></script>
-<script type="text/jsx">
-  /** @jsx React.DOM */
+<script>
   var Draggable = ReactDraggable;
   var App = React.createClass({
     getInitialState: function () {
@@ -77,57 +77,59 @@
 
     render: function () {
       return (
-        <div className="bounding-box">
-          <h1>React Draggable</h1>
-          <p>
-            <a href="https://github.com/mzabriskie/react-draggable/blob/master/example/index.html">Demo Source</a>
-          </p>
-          <Draggable zIndex={100}>
-            <div className="box">I can be dragged anywhere</div>
-          </Draggable>
-          <Draggable axis="x" zIndex={100}>
-            <div className="box cursor-x">I can only be dragged horizonally</div>
-          </Draggable>
-          <Draggable axis="y" zIndex={100}>
-            <div className="box cursor-y">I can only be dragged vertically</div>
-          </Draggable>
-          <Draggable onDrag={this.handleDrag} zIndex={100}>
-            <div className="box">
-              <div>I track my position</div>
-              <div>top: {this.state.position.top}, left: {this.state.position.left}</div>
-            </div>
-          </Draggable>
-          <Draggable handle="strong" zIndex={100}>
-            <div className="box no-cursor">
-              <strong className="cursor">Drag here</strong>
-              <div>You must click my handle to drag me</div>
-            </div>
-          </Draggable>
-          <Draggable cancel="strong" zIndex={100}>
-            <div className="box">
-              <strong className="no-cursor">Can&apos;t drag here</strong>
-              <div>Dragging here works</div>
-            </div>
-          </Draggable>
-          <Draggable constrain={constrain(25)}>
-            <div className="box">I snap to a 25 x 25 grid</div>
-          </Draggable>
-          <Draggable constrain={constrain(50)}>
-            <div className="box">I snap to a 50 x 50 grid</div>
-          </Draggable>
-          <Draggable grid={[25,25]}>
-            <div className="box">I snap to a 25 x 25 grid (using deprecated grid API)</div>
-          </Draggable>
-          <Draggable grid={[50,50]}>
-            <div className="box">I snap to a 50 x 50 grid (using deprecated grid API)</div>
-          </Draggable>
-          <Draggable bound="true">
-            <div className="box">I am bound to this box</div>
-          </Draggable>
-          <Draggable bound="all point">
-            <div className="box">I am bound to this box by my top left corner</div>
-          </Draggable>
-        </div>
+        React.DOM.div({className: "bounding-box"},
+          React.DOM.h1({}, "React Draggable"),
+          React.DOM.p({},
+            React.DOM.a(
+              {href: "https://github.com/mikepb/react-draggable/blob/master/example/index.html"},
+              "Demo Source")
+          ),
+          React.createElement(Draggable, {zIndex: 100},
+            React.DOM.div({className: "box"}, "I can be dragged anywhere")
+          ),
+          React.createElement(Draggable, {axis: "x", zIndex: 100},
+            React.DOM.div({className: "box cursor-x"}, "I can only be dragged horizonally")
+          ),
+          React.createElement(Draggable, {axis: "y", zIndex: 100},
+            React.DOM.div({className: "box cursor-y"}, "I can only be dragged vertically")
+          ),
+          React.createElement(Draggable, {onDrag: this.handleDrag, zIndex: 100},
+            React.DOM.div({className: "box"},
+              React.DOM.div({}, "I track my position"),
+              React.DOM.div({}, "top: {this.state.position.top}, left: {this.state.position.left}")
+            )
+          ),
+          React.createElement(Draggable, {handle: "strong", zIndex: 100},
+            React.DOM.div({className: "box no-cursor"},
+              React.DOM.strong({className: "cursor"}, "Drag here"),
+              React.DOM.div({}, "You must click my handle to drag me")
+            )
+          ),
+          React.createElement(Draggable, {cancel: "strong", zIndex: 100},
+            React.DOM.div({className: "box"},
+              React.DOM.strong({className: "no-cursor"}, "Can't drag here"),
+              React.DOM.div({}, "Dragging here works")
+            )
+          ),
+          React.createElement(Draggable, {constrain: constrain(25)},
+            React.DOM.div({className: "box"}, "I snap to a 25 x 25 grid")
+          ),
+          React.createElement(Draggable, {constrain: constrain(50)},
+            React.DOM.div({className: "box"}, "I snap to a 50 x 50 grid")
+          ),
+          React.createElement(Draggable, {grid: [25, 25]},
+            React.DOM.div({className: "box"}, "I snap to a 25 x 25 grid (using deprecated grid API)")
+          ),
+          React.createElement(Draggable, {grid: [50, 50]},
+            React.DOM.div({className: "box"}, "I snap to a 50 x 50 grid (using deprecated grid API)")
+          ),
+          React.createElement(Draggable, {bound: "true"},
+            React.DOM.div({className: "box"}, "I am bound to this box")
+          ),
+          React.createElement(Draggable, {bound: "all point"},
+            React.DOM.div({className: "box"}, "I am bound to this box by my top left corner")
+          )
+        )
       );
     }
   });
@@ -148,7 +150,7 @@
     };
   }
 
-  React.renderComponent(<App/>, document.body);
+  ReactDOM.render(React.createElement(App), document.getElementById("root"));
 </script>
 </body>
 </html>

@@ -1,4 +1,6 @@
-.react-draggable strong, .react-draggable-dragging strong {
+.react-draggable strong,
+.react-draggable-dragging,
+.react-draggable-dragging strong {
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -8,12 +10,4 @@
 
 .react-draggable {
   position: relative;
-}
-
-.react-draggable-dragging {
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  -o-user-select: none;
-  user-select: none;
 }
